@@ -1,4 +1,4 @@
-package org.model.car;
+package org.carrental.model.car;
 
 public enum CarClass {
     STANDARD, PREMIUM

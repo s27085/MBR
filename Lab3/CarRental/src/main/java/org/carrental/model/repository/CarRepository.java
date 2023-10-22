@@ -1,7 +1,7 @@
-package org.model.repository;
+package org.carrental.model.repository;
 
-import org.model.car.Car;
-import org.model.car.CarStatus;
+import org.carrental.model.car.Car;
+import org.carrental.model.car.CarStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,5 +46,8 @@ public class CarRepository {
             it.setVin(car.getVin());
             return it;
         });
+    }
+    public List<Car> GetAll(){
+        return carList;
     }
 }

@@ -1,16 +1,11 @@
-package org.exception;
+package org.carrental.exception;
 
 public class ValidationException extends RuntimeException{
     private String field;
     private String message;
-
-    public String getField() {
-        return field;
-    }
-
     @Override
     public String getMessage() {
-        return message;
+        return field + " " + message;
     }
 
     public ValidationException(String field, String message){
