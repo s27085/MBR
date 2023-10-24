@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.carrental.exception.*;
 import org.carrental.model.car.Car;
 import org.carrental.model.car.CarStatus;
+import org.carrental.model.client.Client;
 import org.carrental.model.repository.CarRepository;
 
 import java.util.List;
@@ -14,12 +15,13 @@ public class CarService {
     private final CarRepository carRepository;
 
     public CarService(CarRepository carRepository){
+        logger.info("Car service initialized!");
         this.carRepository = carRepository;
     }
 
     public Car create(Car car){
         logger.info("Attempt to create a car...");
-        if(car.getMake().isBlank()){
+        if(car.getMarka().isBlank()){
             throw new ValidationException("make", "Cannot be blank");
         }
         if(car.getModel().isBlank()){
@@ -47,4 +49,5 @@ public class CarService {
         return carRepository.getCarById(id)
                 .orElseThrow( () -> new CarNotFoundException("id doesn't match any car"));
     }
+//    public boolean rentCar(Integer clientID, Integer carID){    }
 }
