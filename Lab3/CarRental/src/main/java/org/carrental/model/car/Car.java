@@ -1,18 +1,24 @@
 package org.carrental.model.car;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.carrental.model.repository.RepositoryEntry;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-public class Car extends RepositoryEntry {
-    private String marka;
+@Setter
+@Getter
+public class Car {
+    private Integer id;
+    private String make;
     private String model;
     private String vin;
     private CarStatus carStatus;
     private CarClass carClass;
-    private Boolean occupied;
+
+    public Car(Integer id, String make, String model, String vin, CarStatus carStatus, CarClass carClass) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.vin = vin;
+        this.carStatus = carStatus;
+        this.carClass = carClass;
+    }
 }
