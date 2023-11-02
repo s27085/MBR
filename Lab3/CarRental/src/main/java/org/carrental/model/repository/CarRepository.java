@@ -39,7 +39,7 @@ public class CarRepository {
     public Optional<Car> modify(Car car){
         Optional<Car> carToModify = getCarById(car.getId());
         return carToModify.map(it ->{
-            it.setMake(car.getMake());
+            it.setMarka(car.getMarka());
             it.setCarClass(car.getCarClass());
             it.setCarStatus(car.getCarStatus());
             it.setModel(car.getModel());
