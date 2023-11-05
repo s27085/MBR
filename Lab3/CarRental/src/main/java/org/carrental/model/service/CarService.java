@@ -45,6 +45,13 @@ public class CarService {
         return carRepository.getCarById(id)
                 .orElseThrow( () -> new CarNotFoundException("id doesn't match any car"));
     }
+    public Client getClientById(Integer id){
+        if(id == null){
+            throw new ValidationException("id", "cannot be null");
+        }
+        return clientRepository.getClientById(id)
+                .orElseThrow( () -> new ClientNotFoundException("id doesn't match any client"));
+    }
     public Client register(Client client){
         logger.info("Attempting to register a client...");
         validateClientFields(client);
@@ -89,14 +96,14 @@ public class CarService {
         }
 
     private static void validateCarFields(Car car) {
-        if(car.getMarka().isBlank()){
-            throw new ValidationException("make", "Cannot be blank");
+        if(car.getMake() == null || car.getMake().isBlank()){
+            throw new ValidationException("make", "Cannot be null or blank");
         }
-        if(car.getModel().isBlank()){
-            throw new ValidationException("model", "Cannot be blank");
+        if( car.getModel() == null || car.getModel().isBlank()){
+            throw new ValidationException("model", "Cannot be null or blank");
         }
-        if(car.getVin().isBlank()){
-            throw new ValidationException("vin", "Cannot be blank");
+        if(car.getVin() == null || car.getVin().isBlank()){
+            throw new ValidationException("vin", "Cannot be null or blank");
         }
         if(car.getVin().length() != 3){
             throw new ValidationException("vin", "Vin length must be equal to 3");
@@ -109,14 +116,11 @@ public class CarService {
         }
     }
     private static void validateClientFields(Client client) {
-        if(client.getName().isBlank()){
-            throw new ValidationException("name", "Cannot be blank");
+        if(client.getName() == null || client.getName().isBlank()){
+            throw new ValidationException("name", "Cannot be null or blank");
         }
-        if(client.getGender() == null){
-            throw new ValidationException("gender", "Cannot be blank");
+        if(client.getGender() == null || client.getGender() == null){
+            throw new ValidationException("gender", "Cannot be null or blank");
         }
     }
 }
-
-
-//    public boolean rentCar(Integer clientID, Integer carID){    }

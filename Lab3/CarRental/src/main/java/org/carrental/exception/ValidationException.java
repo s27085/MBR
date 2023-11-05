@@ -3,8 +3,7 @@ package org.carrental.exception;
 public class ValidationException extends RuntimeException{
     private String field;
     private String message;
-    @Override
-    public String getMessage() {
+    public String getMessageWithField() {
         return field + " " + message;
     }
 

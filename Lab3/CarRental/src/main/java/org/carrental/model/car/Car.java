@@ -7,9 +7,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class Car {
     private Integer id;
-    private String marka;
+    private String make;
     private String model;
     private String vin;
     private CarStatus carStatus;
     private CarClass carClass;
+    private Integer price;
 }
