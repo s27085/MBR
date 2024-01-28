@@ -1,9 +1,10 @@
 package org.carrental.model.repository;
 
 import org.carrental.model.client.Client;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
-
+@Repository
 public class ClientRepository {
     private List<Client> clientList = new ArrayList<>();
 

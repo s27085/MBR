@@ -5,10 +5,7 @@ import org.carrental.exception.ValidationException;
 import org.carrental.model.car.Car;
 import org.carrental.model.car.CarClass;
 import org.carrental.model.car.CarStatus;
-import org.carrental.model.client.Client;
-import org.carrental.model.client.Gender;
 import org.carrental.model.repository.CarRepository;
-import org.carrental.model.repository.ClientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,15 +19,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CarServiceTest {
     private static CarService carService;
-    private static CarRepository carRepository;
-    private static ClientRepository clientRepository;
-
     @BeforeEach
-    void setUp(){
-        carRepository = new CarRepository();
-        clientRepository = new ClientRepository();
-        carService = new CarService(carRepository, clientRepository);
+    void setUp() {
+        carService = new CarService(new CarRepository());
     }
+
     @Test
     void shouldCreateNewCar(){
         Car car = new Car(
@@ -57,13 +50,6 @@ class CarServiceTest {
         assertThrows(CarNotFoundException.class, () -> carService.getById(1));
     }
 
-    @ParameterizedTest
-    @MethodSource("provideInvalidClientCredentials")
-    void shouldNotRegisterNewClient(Client client, String message) {
-        ValidationException result = assertThrows(ValidationException.class, () -> carService.register(client));
-        assertEquals(result.getMessage(), message);
-    }
-
     public static Stream<Arguments> provideInvalidCarsAndMessages(){
         return Stream.of(
                 Arguments.of(new Car(
@@ -86,10 +72,4 @@ class CarServiceTest {
                 ), "Cannot be blank")
         );
     }
-    public static Stream<Arguments> provideInvalidClientCredentials(){
-        return Stream.of(
-                Arguments.of(new Client(null, null, Gender.FEMALE), "Cannot be null or blank"),
-                Arguments.of(new Client(null, "grzegrzółka", null), "Cannot be null or blank")
-        );
-        }
 }

@@ -1,16 +1,22 @@
 package org.carrental.model.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.carrental.model.car.Car;
 import org.carrental.model.car.CarStatus;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+@Repository
+@RequiredArgsConstructor
 public class CarRepository {
-    private List<Car> carList = new ArrayList<>();
+    private final List<Car> carList;
 
+    public CarRepository(){
+        this.carList = new ArrayList<>();
+    }
     public Car create(Car car){
         car.setId(carList.size());
         carList.add(car);
@@ -34,7 +40,7 @@ public class CarRepository {
     }
 
     public void removeAll(){
-        carList = new ArrayList<>();
+        carList.clear();
     }
     public Optional<Car> modify(Car car){
         Optional<Car> carToModify = getCarById(car.getId());
